@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hire Me | Zohaib Sattar{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Hire.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hire-section">
+    <div class="container">
+        <h1>Hire Me</h1>
+        <p class="hire-subtitle">
+            Let’s discuss how I can help you build intelligent & scalable solutions.
+        </p>
+
+        <form class="hire-form">
+
+            <div class="form-group">
+                <label>Your Company / Name</label>
+                <input type="text" placeholder="Company or Recruiter Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" placeholder="example@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Role You’re Offering</label>
+                <input type="text" placeholder="AI Engineer / Data Scientist / ML Engineer" required>
+            </div>
+
+            <div class="form-group">
+                <label>Job Description / Work Details</label>
+                <textarea placeholder="Describe responsibilities, goals, expectations..." rows="4"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Salary Range</label>
+                    <input type="text" placeholder="e.g. $2000 – $4000">
+                </div>
+
+                <div class="form-group">
+                    <label>Working Mode</label>
+                    <select>
+                        <option>Remote</option>
+                        <option>Hybrid</option>
+                        <option>Onsite</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" placeholder="Country Name">
+                </div>
+
+                <div class="form-group">
+                    <label>Working Hours</label>
+                    <input type="text" placeholder="Full-time / Part-time / Flexible">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Other Benefits</label>
+                <textarea placeholder="Bonuses, Equity, Learning Budget, Growth Opportunities..." rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Deadline / Start Date</label>
+                <input type="text" placeholder="Immediate / 1 Month / Flexible">
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Send Job Offer
+            </button>
+
+        </form>
+    </div>
+</section>
+
+{% endblock %}

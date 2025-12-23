@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Contact | Zohaib Sattar Portfolio
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Me</h1>
+        <p class="contact-subtitle">
+            Let’s connect and build something intelligent together
+        </p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container contact-grid">
+
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>
+                Whether you want to collaborate, hire, or discuss ideas in
+                <strong>AI, Data Science, or Web Development</strong>,
+                I’m always open to meaningful conversations.
+            </p>
+
+            <ul class="contact-details">
+                <li><strong>Email:</strong> zohaibsattar@example.com</li>
+                <li><strong>Location:</strong> Pakistan</li>
+                <li><strong>Role:</strong> Founder & CEO — AI Scavengers</li>
+            </ul>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send a Message</h2>
+
+            <!-- ✅ Django Success Message -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="popup show">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

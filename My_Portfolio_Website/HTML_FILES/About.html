@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+About | Zohaib Sattar Portfolio
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/About.css' %}">
+{% endblock %}
+{% block content %}
+
+<!-- ================= ABOUT HERO ================= -->
+<section class="about-hero">
+    <div class="container">
+        <h1>About Me</h1>
+        <p class="about-subtitle">
+            Founder & CEO of <strong>AI Scavengers</strong> · Data Scientist · AI Expert
+        </p>
+    </div>
+</section>
+
+<!-- ================= ABOUT CONTENT ================= -->
+<section class="about-content">
+    <div class="container about-grid">
+
+        <!-- LEFT CONTENT -->
+        <div class="about-text">
+            <h2>Who Am I?</h2>
+            <p>
+                I am <strong>Zohaib Sattar</strong>, a passionate technologist focused on
+                building intelligent, scalable, and impactful digital solutions.
+                My journey combines <strong>data science thinking</strong>,
+                <strong>AI innovation</strong>, and <strong>software engineering excellence</strong>.
+            </p>
+
+            <p>
+                I believe technology should not just function — it should
+                <strong>solve real-world problems intelligently</strong>.
+                That belief drives everything I build.
+            </p>
+        </div>
+
+        <!-- RIGHT HIGHLIGHTS -->
+        <div class="about-highlights">
+            <div class="highlight-card">
+                <h3>🚀 Vision</h3>
+                <p>Creating AI-driven solutions that scale globally.</p>
+            </div>
+
+            <div class="highlight-card">
+                <h3>🧠 Expertise</h3>
+                <p>Data Science, AI, Web Development, System Design.</p>
+            </div>
+
+            <div class="highlight-card">
+                <h3>💡 Mindset</h3>
+                <p>Think like a scientist. Build like an engineer.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= EXPERIENCE STRIP ================= -->
+<section class="about-strip">
+    <div class="container strip-grid">
+        <div>
+            <h2>2+</h2>
+            <p>Years Learning & Building</p>
+        </div>
+        <div>
+            <h2>10+</h2>
+            <p>Projects Completed</p>
+        </div>
+        <div>
+            <h2>AI</h2>
+            <p>First Mindset</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

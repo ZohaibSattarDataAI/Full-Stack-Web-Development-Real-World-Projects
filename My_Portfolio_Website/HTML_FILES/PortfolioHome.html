@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% include "About.css"%}
+
+{% block title %}
+Home | Zohaib Sattar Portfolio
+{% endblock %}
+
+{% block content %}
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="container hero-content">
+        <!-- Left side content -->
+        <div class="hero-left">
+            <h1>Hello, I’m <span>Zohaib Sattar</span></h1>
+            <p class="hero-tagline">
+                Founder & CEO of <strong>AI Scavengers</strong><br>
+                Data Scientist & AI Expert
+            </p>
+            <p class="hero-description">
+                I design cutting-edge web applications and AI-powered solutions. 
+                Let's create intelligent, scalable, and innovative digital products together.
+            </p>
+            <h2 style="color:white; margin-bottom:15px;">Short Intro Myself</h2>
+
+<ol style="list-style:none; padding:0; margin:0; display:flex; flex-wrap: wrap; gap:15px; color:white; font-weight:500;">
+    <li style="counter-increment: step-counter; position: relative; padding-left:25px;">
+        <span style="position:absolute; left:0; color:#38bdf8; font-weight:700;">1.</span> Think Like a Data Scientist
+    </li>
+    <li style="counter-increment: step-counter; position: relative; padding-left:25px;">
+        <span style="position:absolute; left:0; color:#38bdf8; font-weight:700;">2.</span> Work Like a Generative AI
+    </li>
+    <li style="counter-increment: step-counter; position: relative; padding-left:25px;">
+        <span style="position:absolute; left:0; color:#38bdf8; font-weight:700;">3.</span> Build Like a Software Engineer
+    </li>
+    <li style="counter-increment: step-counter; position: relative; padding-left:25px;">
+        <span style="position:absolute; left:0; color:#38bdf8; font-weight:700;">4.</span> Utilize the Data like a Data Engineer
+    </li>
+    <li style="counter-increment: step-counter; position: relative; padding-left:25px;">
+        <span style="position:absolute; left:0; color:#38bdf8; font-weight:700;">5.</span> Analyze the Data like a Data Analyst
+    </li>
+</ol>
+         <br><br>
+            <div class="hero-buttons">
+                <a href="Projects" class="btn btn-primary">View Projects</a>
+                <a href="Hire" class="btn btn-secondary">Hire Me</a>
+            </div>
+        </div>
+
+        <!-- Right side image -->
+        
+        </div>
+    </div>
+</section>
+{% endblock %}
