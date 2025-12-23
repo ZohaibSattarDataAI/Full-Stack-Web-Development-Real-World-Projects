@@ -1,0 +1,39 @@
+.projects-hero {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #020024, #090979, #00d4ff);
+    text-align: center;
+    color: white;
+}
+
+.projects-hero h1 {
+    font-size: 3rem;
+}
+
+.projects-section {
+    padding: 80px 0;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: #0f172a;
+    padding: 30px;
+    border-radius: 16px;
+    color: #e5e7eb;
+    transition: all 0.3s ease;
+    border: 1px solid #1e293b;
+}
+
+.project-card h3 {
+    color: #22d3ee;
+    margin-bottom: 12px;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(34,211,238,0.25);
+}

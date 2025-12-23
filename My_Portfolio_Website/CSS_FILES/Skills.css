@@ -1,0 +1,80 @@
+/* ================= SKILLS PAGE ================= */
+
+.skills-hero {
+    background-color: #0f172a;
+    color: #ffffff;
+    text-align: center;
+    padding: 80px 0 50px;
+}
+
+.skills-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.skills-hero .skills-subtitle {
+    font-size: 1.2rem;
+    color: #38bdf8;
+}
+
+/* ================= SKILLS GRID ================= */
+.skills-content {
+    padding: 60px 0;
+    background-color: #f8fafc;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.skills-category {
+    background-color: #ffffff;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skills-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.skills-category h3 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.skills-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.skills-category ul li {
+    margin-bottom: 10px;
+    color: #334155;
+    font-size: 1rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+.skills-category ul li::before {
+    content: "•";
+    color: #38bdf8;
+    position: absolute;
+    left: 0;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .skills-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .skills-hero .skills-subtitle {
+        font-size: 1rem;
+    }
+}
