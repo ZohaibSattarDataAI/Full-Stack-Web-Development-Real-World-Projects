@@ -121,19 +121,6 @@ Unlike basic demos, this project enforces **real calculator constraints**.
 
 - **No external dependencies**
 
-##▶️ How to Run the Project
-
-**Step 1: Clone Repository**
-
-git clone https://github.com/yourusername/8-digit-calculator.git
-
-**Step 2: Open Project**
-
-
-**Step 3: Launch**
-
-**Open calculator.html in any modern browser
-or use VS Code Live Server for development.**
 
 ## Future Enhancements
 
