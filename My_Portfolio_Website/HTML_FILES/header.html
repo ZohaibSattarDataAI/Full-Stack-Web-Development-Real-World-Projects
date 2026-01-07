@@ -1,0 +1,22 @@
+<header class="navbar">
+    <div class="container nav-content">
+
+        <a href="{% url 'Home' %}" class="logo">
+            Zohaib<span>Sattar_Data_AI</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="{% url 'Home' %}">Home</a>
+            <a href="{% url 'About' %}">About</a>
+            <a href="{% url 'Skill' %}">Skills</a>
+            <a href="{% url 'Projects' %}">Projects</a>
+            <a href="{% url 'Contact' %}">Contact</a>
+            <a href="{% url 'blog_list' %}">Blog</a>   <!-- ✅ Updated -->
+        </nav>
+
+        <a href="{% url 'Hire' %}" class="hire-btn">
+            Hire Me
+        </a>
+
+    </div>
+</header>

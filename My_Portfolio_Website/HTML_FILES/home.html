@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% load static %}
+
+{% block title %}Home / Zohaib Sattar{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content">
+
+            <!-- LEFT CONTENT -->
+            <div class="hero-text">
+                <div class="hero-badge">Available for Projects</div>
+
+                <h1 class="hero-title">
+                    Building the Future with <span>AI, Data & Code</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    I'm Zohaib Sattar, a Data Scientist, AI Engineer & Full-Stack Developer
+                    focused on building intelligent, scalable, and high-impact digital solutions.
+                </p>
+
+                <ul class="hero-subtitle">
+                    <li>Think like a Data Scientist</li>
+                    <li>Working like a Generative AI</li>
+                    <li>Utilize data like a Data Engineer</li>
+                    <li>Analyze data like a Data Analyst</li>
+                    <li>Learn like Transformers</li>
+                    <li>Build like a Software Engineer</li>
+                </ul>
+
+                <div class="hero-cta">
+                    <a href="{% url 'Contact' %}" class="btn btn-primary">Let’s Connect</a>
+                    <a href="{% url 'Projects' %}" class="btn btn-outline">View My Work</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">70+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT CODE WINDOW -->
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="window-header">
+                        <div class="window-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="window-title">zohaib.py</div>
+                    </div>
+
+                    <div class="code-content">
+                        <div class="code-line">
+                            <span class="code-keyword">class</span>
+                            <span class="code-function">ZohaibSattar</span>:
+                        </div>
+
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="code-keyword">def</span>
+                            <span class="code-function">__init__</span>(self):
+                        </div>
+
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.role =
+                            <span class="code-string">"AI Engineer & Data Scientist"</span>
+                        </div>
+
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.skills = [
+                            <span class="code-string">"Machine Learning"</span>,<br>
+                            <span class="code-string">"Deep Learning"</span>,<br>
+                            <span class="code-string">"Full-Stack Development"</span>,<br>
+                            <span class="code-string">"Data Analysis"</span>,<br>
+                            <span class="code-string">"Cloud & DevOps"</span><br>
+                            <span class="code-string">"GEN-AI"</span><br>
+                            <span class="code-string">"AI-Automation"</span><br>
+                             <span class="code-string">"Agentic-AI & AI Agents"</span><br>
+                            ]
+                        </div>
+
+                        <div class="code-line">
+                            <span class="code-comment">
+                                # Turning ideas into intelligent systems
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= CERTIFICATIONS SLIDER ================= -->
+<section id="certifications" class="certifications">
+    <div class="container">
+        <h2 class="section-title">My Certifications</h2>
+
+        <div class="certifications-slider">
+            <div class="certifications-track">
+                {% for cert in certifications %}
+                <div class="cert-card">
+                    <img src="{{ cert.image.url }}" alt="{{ cert.title }}">
+                    <h3>{{ cert.title }}</h3>
+                    <p>{{ cert.description }}</p>
+                </div>
+                {% empty %}
+                <p>No certifications available.</p>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

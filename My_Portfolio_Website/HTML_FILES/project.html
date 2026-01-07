@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects | Zohaib Sattar{% endblock %}
+
+{% block content %}
+<section id="projects">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="projects-header">
+            <span class="projects-subtitle">My Work</span>
+            <h2 class="projects-title">Projects That Turn Ideas Into Reality</h2>
+            <p class="projects-desc">
+                A selection of real-world projects showcasing my skills in
+                AI, Data Science, Full-Stack Development, and Cloud Engineering.
+            </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+            <!-- Project Card 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="/media/climate-change.jpg" alt="Climate Change Prediction">
+                    <span>AI</span>
+                </div>
+                <div class="project-content">
+                    <h3>Climate Change Prediction System</h3>
+                    <p>
+                        Machine learning models to analyze climate data and predict
+                        environmental trends with high accuracy.
+                    </p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>ML</span>
+                        <span>Data Science</span>
+                    </div>
+                    <a href="https://github.com/ZohaibSattarDataAI/Deep-Learning-Algorithms-" class="project-btn">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="/media/portfolio.png" alt="Portfolio Website">
+                    <span>Web</span>
+                </div>
+                <div class="project-content">
+                    <h3>Full Stack Portfolio Website</h3>
+                    <p>
+                        A modern, responsive portfolio built using HTML, CSS,
+                        JavaScript, and Django.
+                    </p>
+                    <div class="project-tags">
+                        <span>Django</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <a href="https://github.com/ZohaibSattarDataAI/Full-Stack-Web-Development-Real-World-Projects/tree/main/My_Portfolio_Website" class="project-btn">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="/media/Customer Segmentation.png" alt="AI Chatbot Assistant">
+                    <span>Data Analysis</span>
+                </div>
+                <div class="project-content">
+                    <h3></h3>Customer Segmentation using RFM Analysis</h3>
+                    <p>
+                       Analyze customer purchasing behavior and group them into segments based on RFM scores.
+                    </p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>EDA</span>
+                        <span>Analysis</span>
+                          <span>Data Visualization</span>
+                    </div>
+                    <a href="https://github.com/ZohaibSattarDataAI/Data-Analysis-Using-Python/tree/main/Customer%20Segmentation%20using%20RFM%20Analysis" class="project-btn">View Project</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

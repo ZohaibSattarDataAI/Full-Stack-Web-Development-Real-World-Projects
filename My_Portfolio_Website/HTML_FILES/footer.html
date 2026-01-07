@@ -1,0 +1,63 @@
+{% load static %}
+
+<footer class="footer">
+
+    <!-- MAIN FOOTER CONTENT -->
+    <div class="container footer-grid">
+
+        <!-- Brand Info -->
+        <div class="footer-brand">
+            <h3 class="footer-logo">
+                Zohaib<span>Sattar</span>
+            </h3>
+            <p class="footer-desc">
+                Building intelligent, scalable, and future-ready digital solutions
+                using Data Science, AI Engineering, and Full-Stack Development.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>  
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'About' %}">About</a></li>
+                <li><a href="{% url 'Skill' %}">Skills</a></li>
+                <li><a href="{% url 'Projects' %}">Projects</a></li>
+                <li><a href="{% url 'Contact' %}">Contact</a></li>
+                <li><a href="{% url 'blog_list' %}">Blog</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-links">
+            <h4>Expertise</h4>
+            <ul>
+                <li><a href="{% url 'Skill' %}">Data Science</a></li>
+                <li><a href="{% url 'Skill' %}">AI Engineering</a></li>
+                <li><a href="{% url 'Skill' %}">Machine Learning</a></li>
+                <li><a href="{% url 'Skill' %}">Full-Stack Development</a></li>
+                <li><a href="{% url 'Skill' %}">Cloud & DevOps</a></li>
+            </ul>
+        </div>
+
+        <!-- Social -->
+        <div class="footer-social">
+            <h4>Let’s Connect</h4>
+            <div>
+                <a href="https://github.com/ZohaibSattarDataAI" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/zohaib-sattar-5680ab2a5/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/zohaibsattar.data.ai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100092427765539" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:zabizubi86@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER END LINE -->
+    <div class="footer-bottom">
+        <p>© 2026 Zohaib Sattar — All Rights Reserved</p>
+    </div>
+
+</footer>

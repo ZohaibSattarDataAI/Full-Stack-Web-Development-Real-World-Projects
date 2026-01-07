@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %}Contact | Zohaib Sattar{% endblock %}
+
+{% block content %}
+
+<section id="contact">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="contact-header">
+            <span class="contact-subtitle">Let’s Connect</span>
+            <h2 class="contact-title">Have a Project or Idea?</h2>
+            <p class="contact-desc">
+                I’m always open to discussing new opportunities, collaborations,
+                or innovative ideas in AI, Data Science, and Web Development.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Feel free to reach out through any of the channels below.</p>
+
+                <ul>
+                    <li><strong>Email:</strong> zabizubi86@gmail.com</li>
+                    <li><strong>Location:</strong> Pakistan</li>
+                    <li><strong>Role:</strong> Founder & CEO — AI Scavengers</li>
+                </ul>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+
+                <!-- Success / Error Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="Your Name" 
+                        required
+                    >
+
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Your Email" 
+                        required
+                    >
+
+                    <input 
+                        type="text" 
+                        name="subject" 
+                        placeholder="Subject" 
+                        required
+                    >
+
+                    <textarea 
+                        name="message" 
+                        rows="5" 
+                        placeholder="Your Message" 
+                        required
+                    ></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

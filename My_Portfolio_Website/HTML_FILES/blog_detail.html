@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ blog.title }} | Zohaib Sattar{% endblock %}
+
+{% block content %}
+
+<section id="blog-detail">
+
+    <div class="container blog-detail-container">
+
+        <!-- Blog Header -->
+        <div class="blog-detail-header">
+            <h1 class="blog-detail-title">{{ blog.title }}</h1>
+            <div class="blog-detail-meta">
+                <span class="blog-author"><strong>Author:</strong> {{ blog.author.username }}</span>
+                <span class="blog-date"><strong>Date:</strong> {{ blog.created_at|date:"F j, Y" }}</span>
+                {% if blog.category %}
+                <span class="blog-category"><strong>Category:</strong> {{ blog.category }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Blog Image -->
+        {% if blog.cover_image %}
+        <div class="blog-detail-image-wrapper">
+            <img src="{{ blog.cover_image.url }}" alt="{{ blog.title }}" class="blog-detail-image">
+        </div>
+        {% endif %}
+
+        <!-- Blog Content -->
+        <div class="blog-detail-content">
+            {{ blog.content|linebreaks }}
+        </div>
+
+        <!-- Back Link -->
+        <div class="blog-detail-back">
+            <a href="{% url 'blog_list' %}" class="back-btn">← Back to Blog</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

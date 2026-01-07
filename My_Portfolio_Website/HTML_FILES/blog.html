@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Blog | Zohaib Sattar{% endblock %}
+
+{% block content %}
+
+<section id="blog">
+
+    <!-- Blog Header -->
+    <div class="container blog-header">
+        <span class="blog-subtitle">Knowledge & Insights</span>
+        <h2 class="blog-title">Thoughts on AI, Data & Engineering</h2>
+        <p class="blog-desc">
+            Sharing practical insights, tutorials, and experiences from my journey
+            in Artificial Intelligence, Data Science, and Full-Stack Development.
+        </p>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="container blog-grid">
+
+        {% for blog in blogs %}
+        <div class="blog-card">
+
+            <!-- Blog Image -->
+            {% if blog.picture %}
+            <div class="blog-image" style="background-image: url('{{ blog.picture.url }}');"></div>
+            {% else %}
+            <div class="blog-image placeholder">
+                No Image
+            </div>
+            {% endif %}
+
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <span class="blog-tag">{{ blog.category|default:"General" }}</span>
+                <h3 class="blog-heading">{{ blog.title }}</h3>
+                <p class="blog-text">{{ blog.short_description }}</p>
+                <a href="{% url 'blog_detail' slug=blog.slug %}" class="blog-read">Read More →</a>
+            </div>
+
+        </div>
+        {% empty %}
+        <p>No blogs published yet.</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Hire Me / Zohaib Sattar{% endblock %}
+
+{% block content %}
+<section id="hire-me">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="hire-header">
+            <span class="hire-subtitle">Work With Me</span>
+            <h2 class="hire-title">Let’s Build Something Exceptional</h2>
+            <p class="hire-desc">
+                Share your project requirements and I’ll help you turn your idea into a
+                powerful, scalable, and intelligent digital solution.
+            </p>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- Form -->
+        <div class="hire-card">
+            <form method="post" class="hire-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="role_required">Role Required</label>
+                    <input
+                        type="text"
+                        name="role_required"
+                        id="role_required"
+                        placeholder="e.g. AI Engineer, Full Stack Developer"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="project_description">Project Description</label>
+                    <textarea
+                        name="project_description"
+                        id="project_description"
+                        rows="4"
+                        placeholder="Briefly describe your project goals and expectations"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salary_budget_range">Salary / Budget Range</label>
+                        <input
+                            type="text"
+                            name="salary_budget_range"
+                            id="salary_budget_range"
+                            placeholder="e.g. $1000 - $3000"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project_duration">Project Duration</label>
+                        <input
+                            type="text"
+                            name="project_duration"
+                            id="project_duration"
+                            placeholder="e.g. 1 Month, 3 Months"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="work_type">Work Type</label>
+                        <select name="work_type" id="work_type" required>
+                            <option value="">Select Work Type</option>
+                            <option value="Remote">Remote</option>
+                            <option value="Onsite">Onsite</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_location">Client Location</label>
+                        <input
+                            type="text"
+                            name="client_location"
+                            id="client_location"
+                            placeholder="Country / City"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="total_budget">Your Total Budget</label>
+                    <input
+                        type="text"
+                        name="total_budget"
+                        id="total_budget"
+                        placeholder="Enter your project budget"
+                        required
+                    >
+                </div>
+
+                <button href="hire"type="submit" class="hire-btn">Submit Requirements</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

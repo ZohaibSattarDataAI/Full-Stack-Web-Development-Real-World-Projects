@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Zohaib Sattar{% endblock %}</title>
+
+    {% load static %}
+
+    <!-- GLOBAL CSS -->
+        <link rel="stylesheet" href="{% static 'css/global.css' %}">
+        <!-- header CSS --> 
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+      <!-- footer CSS --> 
+
+     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+    <!-- HERO CSS -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+      <!-- Skills CSS -->
+        <link rel="stylesheet" href="{% static 'css/skill.css' %}">
+
+          <!-- About CSS -->
+           <link rel="stylesheet" href="{% static 'css/about.css' %}">
+            <!-- Contact CSS -->
+              <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+               <!-- Hire CSS -->
+                <link rel="stylesheet" href="{% static 'css/hire.css' %}">
+                  <!-- Blog CSS -->
+                <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+                   <!-- Project CSS -->
+                 <link rel="stylesheet" href="{% static 'css/project.css' %}">
+                  <!-- Blog_details CSS -->
+                   <link rel="stylesheet" href="{% static 'css/blog_details.css' %}">
+
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    {% include 'header.html' %}
+
+    <!-- HERO -->
+    {% block hero %}
+    {% endblock %}
+
+    <!-- PAGE CONTENT -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+</body>
+</html>
