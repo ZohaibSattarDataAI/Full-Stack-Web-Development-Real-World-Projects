@@ -146,6 +146,8 @@ Each project reflects **real production use cases**, not just demo apps.
 - Freelancers & agency developers
 
 ---
+## 🙌 Author
+
 
 **Zohaib Sattar**  
 📧 Email: [zabizubi86@gmail.com](mailto:zabizubi86@gmail.com)  
@@ -153,12 +155,9 @@ Each project reflects **real production use cases**, not just demo apps.
 
 ---
 
-## 🙌 Author
-**Zohaib Sattar**  
-📧 Email: zabizubi86@gmail.com  
-🔗 LinkedIn: Zohaib Sattar  
 
----
+
+
 
 ## ⭐ Support the Project
 If you find this repository helpful for learning or building real-world web applications, please ⭐ **star the repo** and share it.  
