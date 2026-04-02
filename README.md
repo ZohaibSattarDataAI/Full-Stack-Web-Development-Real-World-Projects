@@ -144,6 +144,7 @@ Each project reflects **real production use cases**, not just demo apps.
 - Students building strong portfolios
 - Interview preparation (real-world patterns)
 - Freelancers & agency developers
+  
 
 ---
 ## 🙌 Author
@@ -159,6 +160,6 @@ Each project reflects **real production use cases**, not just demo apps.
 
 
 
-## ⭐ Support the Project
+## ⭐ Support & share the Project
 If you find this repository helpful for learning or building real-world web applications, please ⭐ **star the repo** and share it.  
 Your support helps grow open-source contributions 🚀
