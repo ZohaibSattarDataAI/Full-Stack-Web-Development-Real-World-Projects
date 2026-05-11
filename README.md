@@ -162,4 +162,4 @@ Each project reflects **real production use cases**, not just demo apps.
 
 ## ⭐ Support & share the Project
 If you find this repository helpful for learning or building real-world web applications, please ⭐ **star the repo** and share it.  
-Your support helps grow open-source contributions 🚀
+Your support helps grow open-source contributions 
