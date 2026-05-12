@@ -77,6 +77,7 @@ The **#ZohaibSattarDataAI Tax Calculator** is a full-stack web application that 
 | **Animations** | AOS Library | 2.3.1 |
 
 ## 📁 Project Structure
+```
 tax-calculator/
 │
 ├── backend/
@@ -93,7 +94,7 @@ tax-calculator/
 ├── run_project.bat # Windows batch runner
 ├── Makefile # Make commands runner
 └── README.md # Project documentation
-
+```
 Tax Brackets Table
 Salary Range (PKR)	Intended Rate	Actual Applied Rate	Status
 0 - 30,000	25%	25%	✅ Working
