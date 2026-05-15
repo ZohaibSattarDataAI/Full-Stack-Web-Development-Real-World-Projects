@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
+        host="full-stack-web-development-real-world-projects-production.up.railway.app",
         port=8000,
         reload=True
     )
