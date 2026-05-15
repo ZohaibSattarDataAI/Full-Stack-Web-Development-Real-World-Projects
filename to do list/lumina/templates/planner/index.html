@@ -1,0 +1,327 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Lumina Planner | Advanced Task & Exam Hub</title>
+  <!-- Google Fonts + modern reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/to-do-List.css' %}">
+  <script defer src="{% static 'js/to-do-list.js' %}"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- header with animated gradient -->
+    <div class="brand-header">
+      <div class="logo-area">
+        <i class="fas fa-moon-stars"></i>
+        <h1>LUMINA<span>Planner</span></h1>
+      </div>
+      <div class="date-badge" id="liveDate"></div>
+    </div>
+
+    <!-- main add task panel: unified + advanced fields and exam prep section -->
+    <div class="form-panel card">
+      <div class="section-title">
+        <i class="fas fa-plus-circle"></i> <span>Quick Capture</span>
+      </div>
+      <form method="POST" class="add-task-form" id="taskForm">
+        {% csrf_token %}
+        <div class="form-grid">
+          <div class="input-group">
+            <label><i class="fas fa-heading"></i> Task title</label>
+            {{ form.title }}
+          </div>
+          <div class="input-group">
+            <label><i class="fas fa-flag"></i> Priority</label>
+            {{ form.priority }}
+          </div>
+          <div class="input-group">
+            <label><i class="fas fa-calendar-day"></i> Date</label>
+            {{ form.date }}
+          </div>
+          <div class="input-group">
+            <label><i class="fas fa-clock"></i> Time</label>
+            {{ form.time }}
+          </div>
+          <div class="input-group">
+            <label><i class="fas fa-tag"></i> Category</label>
+            {{ form.category }}
+          </div>
+          <div class="input-group full-width">
+            <label><i class="fas fa-tasks"></i> Subtasks (comma separated)</label>
+            {{ form.subtasks }}
+          </div>
+        </div>
+        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add Lumina Task</button>
+      </form>
+    </div>
+
+    <!-- EXAM PREPARATION SECTION - ADVANCED FEATURE -->
+    <div class="exam-panel card">
+      <div class="section-title">
+        <i class="fas fa-graduation-cap"></i> <span>Exam Preparation Hub</span>
+        <button id="addExamBtn" class="icon-btn"><i class="fas fa-plus"></i> Add exam</button>
+      </div>
+      <div class="exam-stats" id="examStats">
+        <span><i class="fas fa-hourglass-half"></i> Active exams: <strong id="activeExamCount">0</strong></span>
+        <span><i class="fas fa-chalkboard-user"></i> Upcoming deadlines</span>
+      </div>
+      <div id="examListContainer" class="exam-list">
+        <!-- dynamic exam cards will be injected via js (mock + existing) -->
+      </div>
+      <!-- hidden form for new exam prep (client side sync but posts to server? kept as advanced frontend with localStorage sync example) 
+           but to match backend integration, we'll use data attributes and send via hidden fields or ajax? 
+           Since the requirement is rewrite HTML/CSS + add exam preparation tasks, we implement full-featured exam block with 
+           persistent storage via localStorage + server tasks remain untouched — but advanced UI fully interactive. -->
+    </div>
+
+    <!-- TASK LIST SECTION (existing django tasks) -->
+    <div class="task-section-header">
+      <div class="section-title"><i class="fas fa-list-check"></i> <span>Your Lumina Tasks</span></div>
+      <div class="filter-chip-group" id="filterChips">
+        <span class="chip active" data-filter="all">All</span>
+        <span class="chip" data-filter="high">🔥 High</span>
+        <span class="chip" data-filter="medium">⚡ Medium</span>
+        <span class="chip" data-filter="low">🍃 Low</span>
+        <span class="chip" data-filter="completed">✓ Completed</span>
+      </div>
+    </div>
+    <div class="task-list" id="taskListContainer">
+      {% for task in tasks %}
+      <div class="task-item" data-priority="{{ task.priority|lower }}" data-completed="{{ task.completed|yesno:'true,false' }}">
+        <div class="task-left">
+          <div class="task-check">
+            <a href="{% url 'complete_task' task.id %}" class="complete-toggle" aria-label="complete">
+              <i class="{% if task.completed %}fas fa-check-circle completed-icon{% else %}far fa-circle{% endif %}"></i>
+            </a>
+          </div>
+          <div>
+            <h3 class="task-title {% if task.completed %}completed{% endif %}">{{ task.title }}</h3>
+            <div class="task-meta">
+              <span><i class="fas fa-calendar-alt"></i> {{ task.date|default:"No date" }}</span>
+              <span><i class="fas fa-clock"></i> {{ task.time|default:"--" }}</span>
+              <span class="category-badge"><i class="fas fa-tag"></i> {{ task.category|default:"General" }}</span>
+              <span class="priority-badge priority-{{ task.priority|lower }}">{{ task.priority|default:"Medium" }}</span>
+            </div>
+            {% if task.subtasks %}
+            <div class="subtask-list">
+              <i class="fas fa-list-ul"></i> subtasks: {{ task.subtasks|truncatechars:40 }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="task-actions">
+          <a href="{% url 'delete_task' task.id %}" class="action-btn delete-btn"><i class="fas fa-trash-alt"></i></a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="empty-state">
+        <i class="fas fa-spa"></i>
+        <p>No tasks yet — add your first Lumina task ✨</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <script>
+    // Advanced dynamic exam preparation logic (client-side) - saves exams in localStorage, fully interactive 
+    // plus compatibility with exam tasks without breaking server-side.
+    (function() {
+      // Exam data store
+      let exams = [];
+      
+      // Load exams from localStorage
+      function loadExams() {
+        const stored = localStorage.getItem('lumina_exam_prep');
+        if(stored) {
+          exams = JSON.parse(stored);
+        } else {
+          // sample demo exams
+          exams = [
+            { id: 'exam1', name: 'Mathematics Final', subject: 'Calculus & Linear Algebra', date: '2026-05-20', priority: 'high', progress: 45, topics: 'Derivatives, Integrals, Matrices' },
+            { id: 'exam2', name: 'Physics: Quantum Mechanics', subject: 'Modern Physics', date: '2026-06-05', priority: 'medium', progress: 20, topics: 'Wave functions, Schrödinger equation' },
+            { id: 'exam3', name: 'Web Development Capstone', subject: 'Fullstack', date: '2026-04-30', priority: 'high', progress: 70, topics: 'React, Django, Deployment' }
+          ];
+          localStorage.setItem('lumina_exam_prep', JSON.stringify(exams));
+        }
+        renderExams();
+        updateExamStats();
+      }
+      
+      function saveExams() {
+        localStorage.setItem('lumina_exam_prep', JSON.stringify(exams));
+        renderExams();
+        updateExamStats();
+      }
+      
+      function updateExamStats() {
+        const active = exams.filter(e => new Date(e.date) > new Date()).length;
+        document.getElementById('activeExamCount').innerText = active;
+      }
+      
+      function renderExams() {
+        const container = document.getElementById('examListContainer');
+        if(!container) return;
+        if(exams.length === 0) {
+          container.innerHTML = `<div class="empty-exam"><i class="fas fa-book-open"></i><p>No exam prep yet. Click 'Add exam' to create focused study tasks.</p></div>`;
+          return;
+        }
+        container.innerHTML = exams.map(exam => {
+          const dueDate = new Date(exam.date);
+          const isPast = dueDate < new Date();
+          let progressWidth = exam.progress || 0;
+          return `
+            <div class="exam-card" data-exam-id="${exam.id}">
+              <div class="exam-header">
+                <div class="exam-title"><i class="fas fa-brain"></i> ${escapeHtml(exam.name)}</div>
+                <div class="exam-actions-mini">
+                  <button class="icon-sm edit-exam" data-id="${exam.id}"><i class="fas fa-edit"></i></button>
+                  <button class="icon-sm delete-exam" data-id="${exam.id}"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+              <div class="exam-details">
+                <span><i class="fas fa-flask"></i> ${escapeHtml(exam.subject)}</span>
+                <span class="${isPast ? 'past-date' : 'future-date'}"><i class="fas fa-calendar-week"></i> ${exam.date} ${isPast ? '(past)' : ''}</span>
+                <span class="priority-tag ${exam.priority}"><i class="fas fa-flag"></i> ${exam.priority}</span>
+              </div>
+              <div class="exam-topics"><i class="fas fa-list"></i> ${escapeHtml(exam.topics || 'No topics defined')}</div>
+              <div class="progress-section">
+                <div class="progress-label">Preparation progress <strong>${exam.progress}%</strong></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width: ${exam.progress}%;"></div></div>
+                <div class="study-actions">
+                  <button class="btn-subtle inc-progress" data-id="${exam.id}" data-inc="10"><i class="fas fa-plus-circle"></i> +10%</button>
+                  <button class="btn-subtle dec-progress" data-id="${exam.id}" data-inc="-10"><i class="fas fa-minus-circle"></i> -10%</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+        // attach event listeners to exam controls
+        document.querySelectorAll('.delete-exam').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.dataset.id;
+            exams = exams.filter(ex => ex.id !== id);
+            saveExams();
+          });
+        });
+        document.querySelectorAll('.inc-progress').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.dataset.id;
+            const exam = exams.find(ex => ex.id === id);
+            if(exam) {
+              exam.progress = Math.min(100, exam.progress + 10);
+              saveExams();
+            }
+          });
+        });
+        document.querySelectorAll('.dec-progress').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.dataset.id;
+            const exam = exams.find(ex => ex.id === id);
+            if(exam) {
+              exam.progress = Math.max(0, exam.progress - 10);
+              saveExams();
+            }
+          });
+        });
+        document.querySelectorAll('.edit-exam').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = btn.dataset.id;
+            const exam = exams.find(ex => ex.id === id);
+            if(exam) {
+              const newName = prompt("Edit exam name:", exam.name);
+              if(newName && newName.trim()) exam.name = newName.trim();
+              const newSubject = prompt("Subject / field:", exam.subject);
+              if(newSubject !== null) exam.subject = newSubject || "General";
+              const newDate = prompt("Exam date (YYYY-MM-DD):", exam.date);
+              if(newDate && /^\d{4}-\d{2}-\d{2}$/.test(newDate)) exam.date = newDate;
+              const newTopics = prompt("Core topics:", exam.topics);
+              if(newTopics !== null) exam.topics = newTopics;
+              saveExams();
+            }
+          });
+        });
+      }
+      
+      function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>')return '&gt;'; return m;});}
+      
+      // Add exam modal-like (inline)
+      const addExamBtn = document.getElementById('addExamBtn');
+      if(addExamBtn) {
+        addExamBtn.addEventListener('click', () => {
+          const name = prompt("Exam name (e.g., 'Biology Final'):");
+          if(!name) return;
+          const subject = prompt("Subject / course name:");
+          const date = prompt("Exam date (YYYY-MM-DD):", new Date().toISOString().slice(0,10));
+          const priority = prompt("Priority (high/medium/low):", "medium");
+          const topics = prompt("Main topics (comma separated):");
+          const newId = 'exam_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+          exams.push({
+            id: newId,
+            name: name.trim(),
+            subject: subject || "General",
+            date: date && date.match(/\d{4}-\d{2}-\d{2}/) ? date : new Date().toISOString().slice(0,10),
+            priority: ['high','medium','low'].includes(priority.toLowerCase()) ? priority.toLowerCase() : 'medium',
+            progress: 0,
+            topics: topics || "Not specified"
+          });
+          saveExams();
+        });
+      }
+      
+      // frontend task filter (client side filtering of existing task items)
+      function initTaskFilter() {
+        const chips = document.querySelectorAll('#filterChips .chip');
+        const taskItems = document.querySelectorAll('.task-item');
+        if(!taskItems.length) return;
+        function filterTasks(filterVal) {
+          taskItems.forEach(item => {
+            const priority = item.dataset.priority;
+            const completed = item.dataset.completed === 'true';
+            let show = true;
+            if(filterVal === 'high') show = priority === 'high';
+            else if(filterVal === 'medium') show = priority === 'medium';
+            else if(filterVal === 'low') show = priority === 'low';
+            else if(filterVal === 'completed') show = completed === true;
+            else if(filterVal === 'all') show = true;
+            item.style.display = show ? 'flex' : 'none';
+          });
+        }
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const filter = chip.dataset.filter;
+            filterTasks(filter);
+          });
+        });
+      }
+      
+      // Live date badge
+      function updateLiveDate() {
+        const badge = document.getElementById('liveDate');
+        if(badge) {
+          const now = new Date();
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          badge.innerHTML = `<i class="far fa-calendar-alt"></i> ${now.toLocaleDateString(undefined, options)}`;
+        }
+      }
+      
+      // Additional subtle: progressive enhancement for subtasks input placeholder
+      const subtaskField = document.querySelector('input[name="subtasks"]');
+      if(subtaskField) subtaskField.placeholder = "e.g., Research, Outline, Practice ...";
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        loadExams();
+        initTaskFilter();
+        updateLiveDate();
+        // Add nice hover and smooth completion animation (icons already)
+        // optional priority badge color adjustments already in CSS
+      });
+    })();
+  </script>
+</body>
+</html>
